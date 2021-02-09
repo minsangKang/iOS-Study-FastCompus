@@ -81,3 +81,50 @@ for i in closedRange {
         print("gugu -> \(i) * \(j) = \(i*j)")
     }
 }
+
+
+/* switch */
+/* 해당되는 케이스가 있는경우 실행 후 switch를 종료한다 */
+var num = 10
+switch num {
+case 0:
+    print("--> 0 입니다.")
+case 0...10:
+    print("--> 0 10 사이 입니다. ")
+case 10:
+    print("--> 10 입니다. ")
+default:
+    print("--> 나머지 입니다. ")
+}
+
+let pet = "bird"
+switch pet {
+case "dog", "cat", "bird":
+    print("--> 집동물이네요?")
+default:
+    print("--> 잘 모르겠습니다")
+}
+
+
+num = 20
+switch num {
+case _ where num%2 == 0:
+    print("--> 짝수")
+default:
+    print("--> 홀수")
+}
+
+
+let coordinate = (x: 4, y: 4)
+switch coordinate {
+case (0, 0):
+    print("--> 원점 이네요")
+case (let x, 0):
+    print("--> x축 이네요, x:\(x)")
+case (0, _):
+    print("--> y축 이네요")
+case (let x, let y) where x == y:
+    print("--> x랑 y랑 같음 x,y = \(x),\(y)")
+case (let x, let y):
+    print("--> 좌표 어딘가 x,y = \(x),\(y)")
+}
