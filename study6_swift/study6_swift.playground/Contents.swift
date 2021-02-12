@@ -35,6 +35,7 @@ func subtract(_ a: Int, _ b: Int) -> Int {
 
 var function = add
 function(4, 2)
+
 function = subtract
 function(4, 2)
 
