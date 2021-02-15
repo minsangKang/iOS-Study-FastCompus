@@ -2,7 +2,13 @@ import UIKit
 
 /* 도전과제 */
 //1. 강의 이름, 강사 이름, 학생수를 가지는 struct 만들기 (Lecture)
-struct Lecture {
+
+/* protocol 사용 */
+// CustomStringConvertible : print시 원하는 형태로 출력되게 설정
+struct Lecture: CustomStringConvertible {
+    var description: String {
+        return "Title: \(name), Instructor: \(instructor)"
+    }
     let name: String
     let instructor: String
     let studentsNumber: Int
@@ -33,3 +39,6 @@ let Lecture3 = Lecture(name: "ios", instructor: "fc", studentsNumber: 500)
 let Lectures = [Lecture1, Lecture2, Lecture3]
 
 printLectureName(lects: Lectures, instructor: "FC")
+
+// 프로토콜 내용 출력
+print(Lecture1)
