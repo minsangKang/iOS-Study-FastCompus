@@ -3,7 +3,8 @@ import UIKit
 /* 도전과제 */
 //1. 강의 이름, 강사 이름, 학생수를 가지는 struct 만들기 (Lecture)
 
-/* protocol 사용 */
+/* protocol 프로토콜 사용 */
+/* 지켜야할 약속, 해야할 일들의 목록 */
 // CustomStringConvertible : print시 원하는 형태로 출력되게 설정
 struct Lecture: CustomStringConvertible {
     var description: String {
