@@ -15,11 +15,29 @@ struct Lecture: CustomStringConvertible {
     let studentsNumber: Int
 }
 
-
+/* observation : property가 바뀐 시점을 알 수 있다 */
 struct Person {
     //stored property
-    var firstName: String
+    var firstName: String {
+        //인스턴스값 접근 이전 실행된다
+        willSet {
+            print("willSet: \(firstName) --> \(newValue)")
+        }
+        //인스턴스값 접근 이후 실행된다
+        didSet {
+            print("didSet: \(oldValue) --> \(firstName)")
+        }
+    }
     var lastName: String
+    
+    //lazy property : 인스턴스값 사용시 실행된다
+    lazy var isPopular: Bool = {
+        if fullName == "Jay Park" {
+            return true
+        } else {
+            return false
+        }
+    }()
     //computed property
     var fullName: String {
         get {
@@ -49,7 +67,8 @@ person.lastName
 //get
 person.fullName
 //set
-person.fullName = "Min Sang"
+person.fullName = "Jay Park"
 person.fullName
 
 Person.isAlien
+person.isPopular
