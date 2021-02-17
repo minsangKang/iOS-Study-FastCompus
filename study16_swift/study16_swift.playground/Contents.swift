@@ -39,18 +39,27 @@ struct Person {
         }
     }()
     //computed property
+//    var fullName: String {
+//        get {
+//            return "\(firstName) \(lastName)"
+//        }
+//        set {
+//            if let firstName = newValue.components(separatedBy: " ").first {
+//                self.firstName = firstName
+//            }
+//            if let lastName = newValue.components(separatedBy: " ").last {
+//                self.lastName = lastName
+//            }
+//        }
+//    }
+    /* property vs function*/
+    // property
     var fullName: String {
-        get {
-            return "\(firstName) \(lastName)"
-        }
-        set {
-            if let firstName = newValue.components(separatedBy: " ").first {
-                self.firstName = firstName
-            }
-            if let lastName = newValue.components(separatedBy: " ").last {
-                self.lastName = lastName
-            }
-        }
+        return "\(firstName) \(lastName)"
+    }
+    //function
+    func fullName_f() -> String {
+        return "\(firstName) \(lastName)"
     }
     //type property
     static let isAlien: Bool = false
@@ -67,7 +76,7 @@ person.lastName
 //get
 person.fullName
 //set
-person.fullName = "Jay Park"
+//person.fullName = "Jay Park"
 person.fullName
 
 Person.isAlien
