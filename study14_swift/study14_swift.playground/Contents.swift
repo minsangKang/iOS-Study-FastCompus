@@ -145,8 +145,7 @@ printClosestStore_after2(currentLocation: myLocation_after, stores: stores_after
 
 
 /*----------------------- struct vs class -------------------------*/
-
-class PersonClass {
+struct PersonStruct {
     var name: String
     var age: Int
 
@@ -155,9 +154,7 @@ class PersonClass {
         self.age = age
     }
 }
-
-
-struct PersonStruct {
+class PersonClass {
     var name: String
     var age: Int
 
@@ -173,7 +170,6 @@ pClass2.name = "Hey"
 
 pClass1.name
 pClass2.name
-
 
 var pStruct1 = PersonStruct(name: "Jason", age: 5)
 var pStruct2 = pStruct1
