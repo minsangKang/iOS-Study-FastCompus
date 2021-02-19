@@ -38,3 +38,43 @@ lec.remainSeats()
 
 Lecture.target
 Lecture.소속학원이름()
+
+
+/* extension을 활용하여 만들어진 struct에 메소드를 추가할 수 있다 */
+struct Math {
+    static func abs(value: Int) -> Int {
+        if value > 0 {
+            return value
+        } else {
+            return -value
+        }
+    }
+}
+Math.abs(value: -20)
+
+//만들어져있는 Math struct 에 새로운 함수 추가하기
+extension Math {
+    static func square(value: Int) -> Int {
+        return value * value
+    }
+    
+    static func half(value: Int) -> Int {
+        return value / 2
+    }
+}
+Math.square(value: 5)
+Math.half(value: 20)
+
+//애플이 만들어 놓은 struct에 추가해서 사용할수도 있다
+extension Int {
+    func square() -> Int {
+        return self * self
+    }
+    
+    func half() -> Int {
+        return self / 2
+    }
+}
+var value: Int = 5
+value.square()
+value.half()
