@@ -23,28 +23,28 @@ class Person {
 }
 
 //학생 class
-class Student {
-    var grades: [Grade] = []
-    //중복되는 property가 보인다
-    var firstName: String
-    var lastName: String
-
-    init(firstName: String, lastName: String) {
-        self.firstName = firstName
-        self.lastName = lastName
-    }
-
-    func printMyName() {
-        print("My name is \(firstName) \(lastName)")
-    }
-}
+//class Student {
+//    var grades: [Grade] = []
+//    //중복되는 property가 보인다
+//    var firstName: String
+//    var lastName: String
+//
+//    init(firstName: String, lastName: String) {
+//        self.firstName = firstName
+//        self.lastName = lastName
+//    }
+//
+//    func printMyName() {
+//        print("My name is \(firstName) \(lastName)")
+//    }
+//}
 
 
 /* ------------- 상속을 사용하여 코드중복을 없앤 후 -------------- */
 
 
 //학생 class
-class Student_after: Person {
+class Student: Person {
     var grades: [Grade] = []
     //중복되는 property들은 상속받았기 때문에 그대로 사용이 가능하다!
 }
