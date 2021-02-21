@@ -34,3 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+/* Table view : 반복적으로 동일내용을 리스트로 보여주기 위한 장치 */
+// recycle 형태로 Table view cell이 반복적으로 채워지는 형식
+// 필수 - 테이블뷰 셀이 몇개?
+// 필수 - 테이블뷰 어떻게 보여주나?
+// 추가 - 테이블뷰 클릭하면 어떻게하나?
+
+/* protocol : 해야할 일의 목록 */
+// 테이블뷰 서비스를 쓰기 위해 해야할 일
+
+// 필수 - 테이블뷰 셀이 몇개? -> UITableViewDataSource
+// 필수 - 테이블뷰 어떻게 보여주나? -> UITableViewDelegate
+// 추가 - 테이블뷰 클릭하면 어떻게하나? -> UITableViewDelegate
