@@ -8,6 +8,10 @@
 import UIKit
 
 class BountyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    //데이터 생성
+    let nameList = ["brook", "chopper", "franky", "luffy", "nami", "robin", "sanji", "zoro"]
+    let bountryList = [33000000, 50, 440000, 3000000, 16000000, 80000000, 77000000, 120000000]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,12 +21,20 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     //필수1. - 테이블뷰 셀이 몇개? -> UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //개수를 반환한다
-        return 5
+        return bountryList.count
     }
     //필수2. - 테이블뷰 어떻게 보여주나? -> UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //보여줄 cell를 설정 후 반환한다
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        //optional을 사용해서 ListCell을 넘기도록 한다
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
+            return UITableViewCell()
+        }
+        
+        let img = UIImage(named: "\(nameList[indexPath.row])")
+        cell.imgView.image = img
+        cell.nameLabel.text = nameList[indexPath.row]
+        cell.bountyLabel.text = "\(bountryList[indexPath.row])"
         
         return cell
     }
@@ -30,4 +42,11 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("--> \(indexPath.row)")
     }
+}
+
+//custom cell 생성
+class ListCell: UITableViewCell {
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var bountyLabel: UILabel!
 }
