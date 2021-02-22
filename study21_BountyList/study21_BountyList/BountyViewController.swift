@@ -41,6 +41,8 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     //추가 - 테이블뷰 클릭하면 어떻게하나? -> UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("--> \(indexPath.row)")
+        //세그웨이를 실행해서 두번째 화면으로 넘긴다
+        performSegue(withIdentifier: "showDetail", sender: nil)
     }
 }
 
