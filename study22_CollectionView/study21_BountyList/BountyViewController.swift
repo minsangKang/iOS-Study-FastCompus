@@ -7,10 +7,7 @@
 
 import UIKit
 
-class BountyViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    
-    
+class BountyViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     //MVVM
     
@@ -72,45 +69,17 @@ class BountyViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     //UICollectionViewFlowLayout
     //cell 사이즈를 계산할거다 (목표 : 다양한 디바이스에서 일관적인 디자인을 보여주기 위해)
-    
-//    //필수1. - 테이블뷰 셀이 몇개? -> UITableViewDataSource
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        //개수를 반환한다
-//        return viewModel.numOfBountyInfoList
-//    }
-//    //필수2. - 테이블뷰 어떻게 보여주나? -> UITableViewDelegate
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        //보여줄 cell를 설정 후 반환한다
-//        //optional을 사용해서 ListCell을 넘기도록 한다
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
-//            return UITableViewCell()
-//        }
-//
-//        let bountyInfo = viewModel.bountyInfo(at: indexPath.row)
-//
-//        cell.update(info: bountyInfo)
-//        return cell
-//    }
-//    //추가 - 테이블뷰 클릭하면 어떻게하나? -> UITableViewDelegate
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("--> \(indexPath.row)")
-//        //세그웨이를 실행해서 두번째 화면으로 넘긴다
-//        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let itemSpacing: CGFloat = 10
+        let textAreaHeight: CGFloat = 65
+        
+        let width: CGFloat = (collectionView.bounds.width - itemSpacing)/2
+        let height: CGFloat = width * 10/7 + textAreaHeight
+        return CGSize(width: width, height: height)
+    }
 }
 
-////custom cell 생성
-//class ListCell: UITableViewCell {
-//    @IBOutlet weak var imgView: UIImageView!
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var bountyLabel: UILabel!
-//
-//    func update(info: BountyInfo) {
-//        imgView.image = info.image
-//        nameLabel.text = info.name
-//        bountyLabel.text = "\(info.bounty)"
-//    }
-//}
 //custom cell 생성
 class GridCell: UICollectionViewCell {
     @IBOutlet weak var imgView: UIImageView!
