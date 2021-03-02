@@ -124,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				948C958023CA2D9F001642F9 /* Extension+AVPlayerItem.swift */,
-				948C957C23CA2D16001642F9 /* TrackManager.swift */,
 				948C957E23CA2D52001642F9 /* Track.swift */,
+				948C957C23CA2D16001642F9 /* TrackManager.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";

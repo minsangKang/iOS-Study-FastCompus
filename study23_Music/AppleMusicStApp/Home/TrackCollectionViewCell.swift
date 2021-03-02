@@ -15,7 +15,6 @@ class TrackCollecionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         trackThumbnail.layer.cornerRadius = 4
         trackArtist.textColor = UIColor.systemGray2
     }
