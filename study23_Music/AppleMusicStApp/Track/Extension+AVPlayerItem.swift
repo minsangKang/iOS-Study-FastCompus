@@ -10,8 +10,10 @@ import AVFoundation
 import UIKit
 
 extension AVPlayerItem {
+    // Extension 에서는 stored property를 생성할 수 없다
+    // Extension 에서는 computed property, method를 추가할 수 있다
     func convertToTrack() -> Track? {
-        let metadatList = asset.metadata
+        let metadatList = asset.metadata //AVPlayerItem에는 metadata가 존재한다
         
         var trackTitle: String?
         var trackArtist: String?
