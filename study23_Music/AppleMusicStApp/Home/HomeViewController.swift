@@ -80,4 +80,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = width * 4/3
         return CGSize(width: width, height: height)
     }
+    // HeaderView사이즈 조절
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width: CGFloat = collectionView.bounds.width
+        let height: CGFloat = width*100/139
+        return CGSize(width: width, height: height)
+    }
 }

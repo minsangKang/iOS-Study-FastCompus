@@ -90,6 +90,9 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRk-qb-Ta9">
                                             <rect key="frame" x="19" y="62" width="353" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="cRk-qb-Ta9" secondAttribute="height" multiplier="353:200" id="vKI-eT-rtp"/>
+                                            </constraints>
                                             <connections>
                                                 <action selector="cardTapped:" destination="alU-gT-VZx" eventType="touchUpInside" id="V2m-3Z-7dh"/>
                                             </connections>
@@ -97,6 +100,10 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Che-Of-gn4">
                                             <rect key="frame" x="326" y="222" width="36" height="34"/>
                                             <color key="tintColor" systemColor="systemPinkColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="Fmx-xs-NhZ"/>
+                                                <constraint firstAttribute="width" constant="36" id="lC3-mE-d4E"/>
+                                            </constraints>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAY NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjo-US-9pC">
