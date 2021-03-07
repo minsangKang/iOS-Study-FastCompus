@@ -50,11 +50,18 @@ extension HomeViewController: UICollectionViewDataSource {
             }
             
             header.update(with: item)
-            //tapHandler 구성하기
+            //header를 클릭했을때 player를 띄운다
             header.tapHandler = { item -> Void in
-                //player를 띄운다
-                print("--> item title : \(item.convertToTrack()?.title)")
+                let playerStoryBoard = UIStoryboard.init(name: "Player", bundle: nil)
+                guard let playerVC = playerStoryBoard.instantiateViewController(identifier: "PlayerViewController") as? PlayerViewController else {
+                    return
+                }
+                //곡 넘기기
+                playerVC.simplePlayer.replaceCurrentItem(with: item)
+                //화면 띄우기
+                self.present(playerVC, animated: true, completion: nil)
             }
+            
             return header
         default:
             return UICollectionReusableView()
@@ -66,6 +73,15 @@ extension HomeViewController: UICollectionViewDelegate {
     // 클릭했을때 어떻게 할까?
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: 곡 클릭시 플레이어뷰 띄우기
+        let playerStoryBoard = UIStoryboard.init(name: "Player", bundle: nil)
+        guard let playerVC = playerStoryBoard.instantiateViewController(identifier: "PlayerViewController") as? PlayerViewController else {
+            return
+        }
+        //곡 넘기기
+        let item = trackManager.tracks[indexPath.item]
+        playerVC.simplePlayer.replaceCurrentItem(with: item)
+        //화면 띄우기
+        present(playerVC, animated: true, completion: nil)
     }
 }
 
