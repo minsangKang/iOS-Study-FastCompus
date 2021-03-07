@@ -30,6 +30,7 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        simplePlayer.play()
         updatePlayButton()
         updateTime(time: CMTime.zero)
         // TODO: TimeObserver 구현
@@ -48,8 +49,8 @@ class PlayerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // TODO: 뷰나갈때 처리 > 심플플레이어
-        simplePlayer.pause()
-        simplePlayer.replaceCurrentItem(with: nil)
+//        simplePlayer.pause()
+//        simplePlayer.replaceCurrentItem(with: nil)
     }
     
     @IBAction func beginDrag(_ sender: UISlider) {
