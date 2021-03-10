@@ -131,7 +131,7 @@ class TodoListCell: UICollectionViewCell {
     @IBOutlet weak var strikeThroughView: UIView!
     
     @IBOutlet weak var strikeThroughWidth: NSLayoutConstraint!
-    
+    //closure를 사용해서 cell을 벗어나는 기능을 전달하는 역할
     var doneButtonTapHandler: ((Bool) -> Void)?
     var deleteButtonTapHandler: (() -> Void)?
     
@@ -146,7 +146,7 @@ class TodoListCell: UICollectionViewCell {
     }
     
     func updateUI(todo: Todo) {
-        // TODO: 셀 업데이트 하기
+        // TODO: 셀 업데이트 하기 : OK
         checkButton.isSelected = todo.isDone
         descriptionLabel.text = todo.detail
         descriptionLabel.alpha = todo.isDone ? 0.2 : 1
@@ -165,18 +165,25 @@ class TodoListCell: UICollectionViewCell {
     }
     
     func reset() {
-        // TODO: reset로직 구현
-        
+        // TODO: reset로직 구현 : cell 채우기 전 초기상태값으로 설정 : OK
+        descriptionLabel.alpha = 1
+        deleteButton.isHidden = true
+        showStrikeThrough(false)
     }
     
     @IBAction func checkButtonTapped(_ sender: Any) {
-        // TODO: checkButton 처리
+        // TODO: checkButton 처리 : OK
+        checkButton.isSelected = !checkButton.isSelected
+        let isDone = checkButton.isSelected
+        showStrikeThrough(isDone)
+        descriptionLabel.alpha = isDone ? 0.2 : 1
+        deleteButton.isHidden = !isDone
         
-
+        doneButtonTapHandler?(isDone)
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        // TODO: deleteButton 처리 
+        // TODO: deleteButton 처리 : OK
         deleteButtonTapHandler?()
     }
 }
