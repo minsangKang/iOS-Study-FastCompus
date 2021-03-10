@@ -29,8 +29,11 @@ struct Todo: Codable, Equatable { //"==" 연산을 위해 두가지 super를 추
     }
 }
 
+
+
+//여러개의 Todo를 관리하는 역할
 class TodoManager {
-    
+    //single 톤 객체 : 한개객체만으로 여기저기서 사용될 때 사용
     static let shared = TodoManager()
     
     static var lastId: Int = 0
@@ -38,22 +41,33 @@ class TodoManager {
     var todos: [Todo] = []
     
     func createTodo(detail: String, isToday: Bool) -> Todo {
-        //TODO: create로직 추가
-        return Todo(id: 1, isDone: false, detail: "2", isToday: true)
+        //TODO: create로직 추가 : OK
+        let nextId = TodoManager.lastId + 1
+        TodoManager.lastId = nextId
+        return Todo(id: 1, isDone: false, detail: detail, isToday: isToday)
     }
     
     func addTodo(_ todo: Todo) {
-        //TODO: add로직 추가
+        //TODO: add로직 추가 : OK
+        todos.append(todo)
+        saveTodo()
     }
     
     func deleteTodo(_ todo: Todo) {
-        //TODO: delete 로직 추가
+        //TODO: delete 로직 추가 : OK
+        todos = todos.filter { $0.id != todo.id }
+        saveTodo()
         
+//        if let index = todos.firstIndex(of: todo) {
+//            todos.remove(at: index)
+//        }
     }
     
     func updateTodo(_ todo: Todo) {
         //TODO: updatee 로직 추가
-        
+        guard let index = todos.firstIndex(of: todo) else { return }
+        todos[index].update(isDone: todo.isDone, detail: todo.detail, isToday: todo.isToday)
+        saveTodo()
     }
     
     func saveTodo() {
