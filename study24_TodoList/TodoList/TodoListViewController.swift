@@ -141,11 +141,13 @@ class TodoListCell: UICollectionViewCell {
     }
     
     private func showStrikeThrough(_ show: Bool) {
-        if show {
-            strikeThroughWidth.constant = descriptionLabel.bounds.width
-        } else {
-            strikeThroughWidth.constant = 0
-        }
+        UIView.animate(withDuration: 0.5, animations: {
+            if show {
+                self.strikeThroughWidth.constant = self.descriptionLabel.bounds.width
+            } else {
+                self.strikeThroughWidth.constant = 0
+            }
+        })
     }
     
     func reset() {

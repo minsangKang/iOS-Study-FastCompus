@@ -10,20 +10,22 @@ import UIKit
 
 
 // TODO: Codable과 Equatable 추가
-struct Todo: Codable, Equatable {
+struct Todo: Codable, Equatable { //"==" 연산을 위해 두가지 super를 추가
     let id: Int
     var isDone: Bool
     var detail: String
     var isToday: Bool
     
     mutating func update(isDone: Bool, detail: String, isToday: Bool) {
-        // TODO: update 로직 추가
-        
+        // TODO: update 로직 추가 : OK
+        self.isDone = isDone
+        self.detail = detail
+        self.isToday = isToday
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        // TODO: 동등 조건 추가
-        return true
+        // TODO: 동등 조건 추가 : OK
+        return lhs.id == rhs.id
     }
 }
 
