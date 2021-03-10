@@ -64,7 +64,7 @@ class TodoManager {
     }
     
     func updateTodo(_ todo: Todo) {
-        //TODO: updatee 로직 추가
+        //TODO: updatee 로직 추가 : OK
         guard let index = todos.firstIndex(of: todo) else { return }
         todos[index].update(isDone: todo.isDone, detail: todo.detail, isToday: todo.isToday)
         saveTodo()
@@ -82,6 +82,9 @@ class TodoManager {
     }
 }
 
+
+
+//viewController에서 사용되는 viewModel 단위 객체
 class TodoViewModel {
     
     enum Section: Int, CaseIterable {
@@ -96,6 +99,7 @@ class TodoViewModel {
         }
     }
     
+    //viewModel은 manager를 통해 수행을 전달한다
     private let manager = TodoManager.shared
     
     var todos: [Todo] {
@@ -113,6 +117,8 @@ class TodoViewModel {
     var numOfSection: Int {
         return Section.allCases.count
     }
+    
+    
     
     func addTodo(_ todo: Todo) {
         manager.addTodo(todo)

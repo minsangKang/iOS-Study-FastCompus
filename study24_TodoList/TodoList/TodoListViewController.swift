@@ -18,7 +18,8 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     
     
-    // TODO: TodoViewModel 만들기
+    // TODO: TodoViewModel 만들기 : OK
+    let todoListViewModel = TodoViewModel()
     
     
     override func viewDidLoad() {
@@ -27,7 +28,8 @@ class TodoListViewController: UIViewController {
         // TODO: 키보드 디텍션
         
         
-        // TODO: 데이터 불러오기
+        // TODO: 데이터 불러오기 : OK
+        todoListViewModel.loadTasks()
         
     }
     
@@ -55,28 +57,40 @@ extension TodoListViewController {
 
 extension TodoListViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // TODO: 섹션 몇개
-        return 2
+        // TODO: 섹션 몇개 : OK
+        return todoListViewModel.numOfSection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: 섹션별 아이템 몇개
-        return 10
+        // TODO: 섹션별 아이템 몇개 : OK
+        if section == 0 {
+            return todoListViewModel.todayTodos.count
+        } else {
+            return todoListViewModel.upcompingTodos.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // TODO: 커스텀 셀
+        // TODO: 커스텀 셀 : OK
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodoListCell", for: indexPath) as? TodoListCell else {
             return UICollectionViewCell()
         }
-        return cell
         
-        // TODO: todo 를 이용해서 updateUI
+        // TODO: todo 를 이용해서 updateUI : OK
+        var todo: Todo
+        if indexPath.section == 0 {
+            todo = todoListViewModel.todayTodos[indexPath.item]
+        } else {
+            todo = todoListViewModel.upcompingTodos[indexPath.item]
+        }
+        cell.updateUI(todo: todo)
+        
         // TODO: doneButtonHandler 작성
         // TODO: deleteButtonHandler 작성
         return cell
     }
     
+    //headerView 보이기 설정내용
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
