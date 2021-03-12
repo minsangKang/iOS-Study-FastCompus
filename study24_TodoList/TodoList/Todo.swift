@@ -10,6 +10,7 @@ import UIKit
 
 
 // TODO: Codable과 Equatable 추가
+// Codable : json <-> struct 간 변환작업을 쉽게 도와준다
 struct Todo: Codable, Equatable { //"==" 연산을 위해 두가지 super를 추가
     let id: Int
     var isDone: Bool

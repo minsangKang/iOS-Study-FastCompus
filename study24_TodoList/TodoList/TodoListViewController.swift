@@ -31,6 +31,14 @@ class TodoListViewController: UIViewController {
         // TODO: 데이터 불러오기 : OK
         todoListViewModel.loadTasks()
         
+        let todo = TodoManager.shared.createTodo(detail: "👍 🚀 Corona 난리", isToday: true)
+        Storage.saveTodo(todo, fileName: "test.json")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        let todo = Storage.restoreTodo("test.json")
+        print("--> restore frome disk: \(todo)")
     }
     
     @IBAction func isTodayButtonTapped(_ sender: Any) {

@@ -42,9 +42,11 @@ public class Storage {
         
         do {
             let data = try encoder.encode(obj)
+            //동일이름의 파일이 있는 경우 삭제
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(at: url)
             }
+            //파일을 저장
             FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
         } catch let error {
             print("---> Failed to store msg: \(error.localizedDescription)")
@@ -96,6 +98,7 @@ public class Storage {
 
 // MARK: TEST 용
 extension Storage {
+    // Todo -> json -> file 저장
     static func saveTodo(_ obj: Todo, fileName: String) {
         let url = Directory.documents.url.appendingPathComponent(fileName, isDirectory: false)
         print("---> [TEST] save to here: \(url)")
@@ -104,15 +107,18 @@ extension Storage {
         
         do {
             let data = try encoder.encode(obj)
+            //동일이름의 파일이 있는 경우 삭제
             if FileManager.default.fileExists(atPath: url.path) {
                 try FileManager.default.removeItem(at: url)
             }
+            //파일을 저장
             FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
         } catch let error {
             print("---> Failed to store msg: \(error.localizedDescription)")
         }
     }
     
+    //file -> json -> Todo
     static func restoreTodo(_ fileName: String) -> Todo? {
         let url = Directory.documents.url.appendingPathComponent(fileName, isDirectory: false)
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }

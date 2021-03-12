@@ -43,7 +43,7 @@ class TrackManager {
         
         //방법 3
         let items = urls.map { url in
-            return AVPlayerItem(url: url)
+            AVPlayerItem(url: url)
         }
         
         //방법 4

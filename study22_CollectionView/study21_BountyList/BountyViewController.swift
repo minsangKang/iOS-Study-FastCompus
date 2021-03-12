@@ -80,6 +80,9 @@ class BountyViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
 }
 
+
+
+
 //custom cell 생성
 class GridCell: UICollectionViewCell {
     @IBOutlet weak var imgView: UIImageView!
@@ -92,6 +95,9 @@ class GridCell: UICollectionViewCell {
         bountyLabel.text = "\(info.bounty)"
     }
 }
+
+
+
 
 //viewModel 생성
 class BountyViewModel {
