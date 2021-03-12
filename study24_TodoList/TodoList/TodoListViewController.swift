@@ -49,12 +49,18 @@ class TodoListViewController: UIViewController {
     }
     
     @IBAction func addTaskButtonTapped(_ sender: Any) {
-        // TODO: Todo 태스크 추가
+        // TODO: Todo 태스크 추가 : OK
         // add task to view model
+        guard let detail = inputTextField.text, detail.isEmpty == false else { return }
+        let todo = TodoManager.shared.createTodo(detail: detail, isToday: isTodayButton.isSelected)
+        todoListViewModel.addTodo(todo)
         // and tableview reload or update
+        collectionView.reloadData()
+        inputTextField.text = ""
+        isTodayButton.isSelected = false
     }
     
-    // TODO: BG 탭했을때, 키보드 내려오게 하기
+    // TODO: BG 탭했을때, 키보드 내려오게 하기 : OK
     @IBAction func tapBG(_ sender: Any) {
         inputTextField.resignFirstResponder()
     }
@@ -113,8 +119,19 @@ extension TodoListViewController: UICollectionViewDataSource {
         }
         cell.updateUI(todo: todo)
         
-        // TODO: doneButtonHandler 작성
-        // TODO: deleteButtonHandler 작성
+        // TODO: doneButtonHandler 작성 : OK
+        cell.doneButtonTapHandler = { isDone in
+            todo.isDone = isDone
+            self.todoListViewModel.updateTodo(todo)
+            self.collectionView.reloadData()
+        }
+        
+        // TODO: deleteButtonHandler 작성 : OK
+        cell.deleteButtonTapHandler = {
+            self.todoListViewModel.deleteTodo(todo)
+            self.collectionView.reloadData()
+        }
+        
         return cell
     }
     
