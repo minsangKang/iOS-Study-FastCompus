@@ -25,7 +25,9 @@ class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: 키보드 디텍션
+        // TODO: 키보드 디텍션 : keyboard가 띄워지고, 사라지면 adjustInputView가 실행되는 원리 : OK
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
         // TODO: 데이터 불러오기 : OK
@@ -42,7 +44,7 @@ class TodoListViewController: UIViewController {
     }
     
     @IBAction func isTodayButtonTapped(_ sender: Any) {
-        // TODO: 투데이 버튼 토글 작업
+        // TODO: 투데이 버튼 토글 작업 : OK
         isTodayButton.isSelected = !isTodayButton.isSelected
     }
     
@@ -53,13 +55,31 @@ class TodoListViewController: UIViewController {
     }
     
     // TODO: BG 탭했을때, 키보드 내려오게 하기
+    @IBAction func tapBG(_ sender: Any) {
+        inputTextField.resignFirstResponder()
+    }
+    
 }
 
 extension TodoListViewController {
     @objc private func adjustInputView(noti: Notification) {
         guard let userInfo = noti.userInfo else { return }
-        // TODO: 키보드 높이에 따른 인풋뷰 위치 변경
+        // TODO: 키보드 높이에 따른 인풋뷰 위치 변경 : OK
+        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
+        var adjustmentHeight: CGFloat = 0
+        //이동시킬 Height를 구한다
+        if noti.name == UIResponder.keyboardWillShowNotification {
+            adjustmentHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+        } else {
+            adjustmentHeight = 0
+        }
+        //구한 Height 만큼 변화시킨다
+        UIView.animate(withDuration: 1, animations: {
+            self.inputViewBottom.constant = adjustmentHeight
+        })
+        
+        print("--> keyboard End Frame: \(keyboardFrame)")
     }
 }
 
