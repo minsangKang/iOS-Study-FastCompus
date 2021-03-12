@@ -194,7 +194,7 @@ class TodoListCell: UICollectionViewCell {
         // TODO: 셀 업데이트 하기 : OK
         checkButton.isSelected = todo.isDone
         descriptionLabel.text = todo.detail
-        descriptionLabel.alpha = todo.isDone ? 0.2 : 1
+        descriptionLabel.alpha = todo.isDone ? 0.5 : 1
         deleteButton.isHidden = todo.isDone == false
         showStrikeThrough(todo.isDone)
     }
@@ -221,7 +221,7 @@ class TodoListCell: UICollectionViewCell {
         checkButton.isSelected = !checkButton.isSelected
         let isDone = checkButton.isSelected
         showStrikeThrough(isDone)
-        descriptionLabel.alpha = isDone ? 0.2 : 1
+        descriptionLabel.alpha = isDone ? 0.5 : 1
         deleteButton.isHidden = !isDone
         
         doneButtonTapHandler?(isDone)
