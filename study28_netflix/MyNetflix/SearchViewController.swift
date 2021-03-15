@@ -13,13 +13,47 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultCollectionView: UICollectionView!
     
+    //viewController
+    var movies: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
 }
-
+//내용 설정
+extension SearchViewController: UICollectionViewDataSource {
+    //개수 설정
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movies.count
+    }
+    //표현 설정
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //화면에 들어갈 cell를 ResultCell 형식으로 준비
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ResultCell", for: indexPath) as? ResultCell else {
+            return UICollectionViewCell()
+        }
+        //cell의 이미지를 movies 데이터를 이용해 수정
+        let movie = movies[indexPath.item]
+        //string -> image 변환작업 : 외부코드 가져다 쓰는 방법으로 사용
+        
+        return cell
+    }
+}
+//터치 설정
+extension SearchViewController: UICollectionViewDelegate {
+    
+}
+//크기 설정
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let margin: CGFloat = 8
+        let itemSpacing: CGFloat = 10
+        let width: CGFloat = (collectionView.bounds.width - (margin*2) - (itemSpacing*2)) / 3
+        let height: CGFloat = width * 10/7
+        return CGSize(width: width, height: height)
+    }
+}
 
 extension SearchViewController: UISearchBarDelegate {
     //키보드 내리기 함수
@@ -41,7 +75,13 @@ extension SearchViewController: UISearchBarDelegate {
         // search 함수에서 url -> decode -> [Movie]를 넘겨받아온 후의 closure
         SearchAPI.search(searchTerm) { movies in
             //CollectionView 로 표현해주자
-            print("--> in closure count: \(movies.count)")
+            //가져온 movies로 데이터를 수정
+            self.movies = movies
+            //화면을 재수정하기 위해서 main 쓰레드에서 동작
+            DispatchQueue.main.async {
+                self.resultCollectionView.reloadData()
+            }
+            
         }
         
         print("--> 검색어: \(searchTerm)")
@@ -128,4 +168,10 @@ struct Movie: Codable {
         case thumbnailPath = "artworkUrl100"
         case previewURL = "previewUrl"
     }
+}
+
+
+
+class ResultCell: UICollectionViewCell {
+    @IBOutlet weak var movieThumbnail: UIImageView!
 }
