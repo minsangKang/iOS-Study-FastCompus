@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchViewController: UIViewController {
 
@@ -35,8 +36,9 @@ extension SearchViewController: UICollectionViewDataSource {
         }
         //cell의 이미지를 movies 데이터를 이용해 수정
         let movie = movies[indexPath.item]
+        let url = URL(string: movie.thumbnailPath)!
         //string -> image 변환작업 : 외부코드 가져다 쓰는 방법으로 사용
-        
+        cell.movieThumbnail.kf.setImage(with: url)
         return cell
     }
 }
@@ -74,7 +76,7 @@ extension SearchViewController: UISearchBarDelegate {
         
         // search 함수에서 url -> decode -> [Movie]를 넘겨받아온 후의 closure
         SearchAPI.search(searchTerm) { movies in
-            //CollectionView 로 표현해주자
+            //CollectionView 로 표현해주자 : OK
             //가져온 movies로 데이터를 수정
             self.movies = movies
             //화면을 재수정하기 위해서 main 쓰레드에서 동작
