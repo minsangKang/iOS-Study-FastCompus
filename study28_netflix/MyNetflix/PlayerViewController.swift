@@ -23,14 +23,42 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        playerView.player = player
+    }
+    //화면 진입시 실행
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        play()
     }
     
     @IBAction func togglePlaybutton(_ sender: Any) {
-        playButton.isSelected = !playButton.isSelected
+        if player.isPlaying {
+            pause()
+        } else {
+            play()
+        }
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
+        reset()
         dismiss(animated: false, completion: nil)
+    }
+}
+
+extension PlayerViewController {
+    func play() {
+        player.play()
+        playButton.isSelected = true
+    }
+    
+    func pause() {
+        player.pause()
+        playButton.isSelected = false
+    }
+    
+    func reset() {
+        pause()
+        player.replaceCurrentItem(with: nil)
     }
 }
 //현재 진행중인지 여부 메소드 생성
