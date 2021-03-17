@@ -81,9 +81,8 @@ extension TodoListViewController {
             adjustmentHeight = 0
         }
         //구한 Height 만큼 변화시킨다
-        UIView.animate(withDuration: 1, animations: {
-            self.inputViewBottom.constant = adjustmentHeight
-        })
+        self.inputViewBottom.constant = adjustmentHeight
+        self.view.layoutIfNeeded()
         
         print("--> keyboard End Frame: \(keyboardFrame)")
     }
@@ -118,6 +117,7 @@ extension TodoListViewController: UICollectionViewDataSource {
             todo = todoListViewModel.upcompingTodos[indexPath.item]
         }
         cell.updateUI(todo: todo)
+        self.view.layoutIfNeeded()
         
         // TODO: doneButtonHandler 작성 : OK
         cell.doneButtonTapHandler = { isDone in
@@ -197,6 +197,7 @@ class TodoListCell: UICollectionViewCell {
         descriptionLabel.alpha = todo.isDone ? 0.5 : 1
         deleteButton.isHidden = todo.isDone == false
         showStrikeThrough(todo.isDone)
+        
     }
     
     private func showStrikeThrough(_ show: Bool) {

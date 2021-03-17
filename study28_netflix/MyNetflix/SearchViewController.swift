@@ -44,7 +44,15 @@ extension SearchViewController: UICollectionViewDataSource {
 }
 //터치 설정
 extension SearchViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.item]
+        //movie -> player vc 전달
+        //player 실행
+        let sb = UIStoryboard(name: "Player", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: "PlayerViewController") as! PlayerViewController
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false, completion: nil)
+    }
 }
 //크기 설정
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
