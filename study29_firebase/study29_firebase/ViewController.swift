@@ -11,13 +11,15 @@ import Firebase
 class ViewController: UIViewController {
 
     @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var numOfCustomers: UILabel!
     let db = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabel()
-        saveBasicTypes()
-        saveCustomers()
+//        saveBasicTypes()
+//        saveCustomers()
+        fetchCustomers()
     }
     
     func updateLabel() {
@@ -30,7 +32,7 @@ class ViewController: UIViewController {
         }
     }
 }
-
+//upload
 extension ViewController {
     func saveBasicTypes() {
         let url = db.child("basicTypes")
@@ -56,8 +58,30 @@ extension ViewController {
         url.child(customer3.id).setValue(customer3.toDictionary)
     }
 }
+//download
+extension ViewController {
+    func fetchCustomers() {
+        db.child("customers").observeSingleEvent(of: .value) { snapshot in
+            print("--> \(snapshot.value)")
+            
+            do {
+                let data = try JSONSerialization.data(withJSONObject: snapshot.value, options: [])
+                let decoder = JSONDecoder()
+                let customers: [Customer] = try decoder.decode([Customer].self, from: data)
+                print("--> customers: \(customers.count)")
+                
+                DispatchQueue.main.async {
+                    self.numOfCustomers.text = "# of Customers: \(customers.count)"
+                }
+            } catch let error {
+                print("--> error: \(error)")
+            }
+            
+        }
+    }
+}
 
-struct Customer {
+struct Customer: Codable {
     let id: String
     let name: String
     let books: [Book]
@@ -68,14 +92,25 @@ struct Customer {
         let dict: [String: Any] = ["id": id, "name": name, "books": booksArray]
         return dict
     }
+    
+    var customerPrint: Void {
+        print("id: \(id) name: \(name)")
+        for i in 0..<books.count {
+            print("books\(i): \(books[i].bookPrint)")
+        }
+    }
 }
 
-struct Book {
+struct Book: Codable {
     let title: String
     let author: String
     
     var toDictionary: [String: Any] {
         let dict: [String: Any] = ["title": title, "author": author]
         return dict
+    }
+    
+    var bookPrint: String {
+        return "title: \(title) author: \(author)"
     }
 }
