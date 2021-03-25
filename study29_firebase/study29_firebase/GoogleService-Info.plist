@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1095333991206-7gren0jhbefhhdlphr5evemoa7r0rno2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1095333991206-7gren0jhbefhhdlphr5evemoa7r0rno2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB4DpoggEYY2ZQe4Jr9TJQarL9VaZqdCyg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1095333991206</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fdee.study29-firebase</string>
+	<key>PROJECT_ID</key>
+	<string>fastcampus101</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fastcampus101.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1095333991206:ios:bf41adfb03aabe99dbe7e7</string>
+</dict>
+</plist>
