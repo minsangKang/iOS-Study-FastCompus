@@ -14,12 +14,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var numOfCustomers: UILabel!
     let db = Database.database().reference()
     
+    var customers: [Customer] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabel()
-//        saveBasicTypes()
+        saveBasicTypes()
 //        saveCustomers()
         fetchCustomers()
+//        updateBasicTypes()
+//        deleteBasicTypes()
     }
     
     func updateLabel() {
@@ -30,6 +34,32 @@ class ViewController: UIViewController {
                 self.dataLabel.text = value
             }
         }
+    }
+    
+    @IBAction func createCustomer(_ sender: Any) {
+        saveCustomers()
+    }
+    
+    @IBAction func fetchCustomer(_ sender: Any) {
+        fetchCustomers()
+    }
+    
+    @IBAction func updateCustomer(_ sender: Any) {
+        updateCustomers()
+    }
+    
+    @IBAction func deleteCustomer(_ sender: Any) {
+        deleteCustomers()
+    }
+    
+    func updateCustomers() {
+        guard customers.isEmpty == false else { return }
+        customers[0].name = "Min"
+        let dictionary = customers.map { $0.toDictionary }
+        db.updateChildValues(["customers": dictionary])
+    }
+    func deleteCustomers() {
+        db.child("customers").removeValue()
     }
 }
 //upload
@@ -68,6 +98,7 @@ extension ViewController {
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value, options: [])
                 let decoder = JSONDecoder()
                 let customers: [Customer] = try decoder.decode([Customer].self, from: data)
+                self.customers = customers
                 print("--> customers: \(customers.count)")
                 
                 DispatchQueue.main.async {
@@ -80,10 +111,25 @@ extension ViewController {
         }
     }
 }
+//update, delete
+extension ViewController {
+    func updateBasicTypes() {
+        let url = db.child("basicTypes")
+        url.updateChildValues(["int": 6])
+        url.updateChildValues(["double": 5.4])
+        url.updateChildValues(["string": "변경괸 스트링"])
+    }
+    func deleteBasicTypes() {
+        let url = db.child("basicTypes")
+        url.child("int").removeValue()
+        url.child("double").removeValue()
+        url.child("string").removeValue()
+    }
+}
 
 struct Customer: Codable {
     let id: String
-    let name: String
+    var name: String
     let books: [Book]
     static var id: Int = 0
     
