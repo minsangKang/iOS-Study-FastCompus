@@ -159,7 +159,7 @@ extension TodoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // TODO: 사이즈 계산하기 : OK
         let width: CGFloat = collectionView.bounds.width
-        let height: CGFloat = 50
+        let height: CGFloat = 20
         return CGSize(width: width, height: height)
     }
 }
